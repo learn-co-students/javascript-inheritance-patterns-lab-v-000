@@ -10,55 +10,71 @@ JavaScript Inheritance Patterns Lab
 
 ## Introduction
 
-- Remind (or call out) that a prototype is essentially just an object
-- Objects have properties, and we can pass properties to related objects on the prototype
-- Objects look for properties by climbing up the prototype chain
+In this lab we're going to create a geometry application that allows us
+to place various shapes on a plane and move them about. We'll be using
+prototypal inheritance with `Object.create` to build objects that inherit from and extend
+base objects. For a refresher on using prototypal inheritance with
+`Object.create`, check the [MDN example](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create).
 
-## Implementation
+We'll also be exploring the idea of *composition*, or using objects as
+parts with which we'll compose other objects. If inheritance describes
+an *is-a* relationship, then you can think of composition as describing
+a *has-a* relationship.
 
-- Start simple by just checking that, e.g., `Rectangle.prototype` is `Shape` (riffing on the [MDN example](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create)
+For instance, if a `Car` has a property `engine` property, and that
+property holds an `Engine` object with its own properties and methods,
+that's composition. An `Engine` would never inherit from `Car`, and a
+`Car` would never inherit from `Engine`, but we can use an `Engine` (and
+other objects) to compose a `Car`.
 
-- Then work on passing initialization variables:
+Remember that a prototype is essentially just an object, and any
+properties and methods we add to an object's prototype will be available
+to all objects that inherit from that prototype via delegation. If a
+property or method isn't found on an object, then JavaScript will look
+at every object up the prototype chain until it is found (or not).
 
-``` javascript
-function Shape(x, y) {
-  this.x = x
-  this.y = y
-}
+Follow the instructions below, and don't forget to make sure your tests
+pass!
 
-function Quadrilateral(
-  x,
-  y,
-  topSideLength,
-  rightSideLength,
-  bottomSideLength,
-  leftSideLength
-) {
-  Shape.call(this, x, y)
-  this.topSideLength = topSideLength
-  this.rightSideLength = rightSideLength
-  this.bottomSideLength = bottomSideLength
-  this.leftSideLength = leftSideLength
-}
+## Instructions
 
-Quadrilateral.prototype = Object.create(Shape.prototype)
-Quadrilateral.prototype.constructor = Quadrilateral
-
-function Rectangle(x, y, length, width) {
-  Quadrilateral.call(this, x, y, length, width, length, width)
-}
-
-Rectangle.prototype = Object.create(Quadrilateral.prototype)
-Rectangle.prototype.constructor = Rectangle
-
-function Square(x, y, length) {
-  Rectangle.call(this, x, y, length, length, length, length)
-}
-```
-
-- The aim is almost to show students how onerous this can be before introducing the new `class` syntax in a later lesson
-
-- Be sure to test that student's use `hasOwnProperty()` when iterating through a collection on an object.
+1. Define a `Point` object that is constructed with an `x,y` coordinate
+   pair to indicate its position. Add a `toString` function to the Point
+prototype to return the location in `(x, y)` format.
+2. Define a `Shape` object. This will be the base for all shapes on the
+   plane. It should have an `addToPlane` function that takes two
+integers, `x` and `y`, as arguments. This function should assign a `Point`
+to the Shape's `position` property based on these arguments. Shape
+should also define a `move` function that takes an `x,y` pair of
+arguments and moves the `position` to a new `Point`.
+3. Define a `Circle` object that inherits from `Shape` and is
+   constructed with an integer argument that sets the `radius` property.
+Define and implement functions on `Circle` to calculate `area()` and
+`circumference()` based on the `radius`.
+4. Define a `Polygon` object that inherits from `Shape`. It should be
+   constructe with an array of `Side` objects that have a `length`
+property. `Polygon` should have a property called `sides` that holds the
+array of `Side` objects. Implement a function called `perimeter()` that
+calculates the perimeter of any `Polygon` based on the lengths of the
+`sides`. Implement a function called `numberOfSides()` that returns the
+number of sides.
+5. Define a `Quadrilateral` object that inherits from `Polygon` and is
+   constructed with four integer arguments representing the side
+lengths.
+6. Define a `Triangle` object that inherits from `Polygon` and is
+   constructed with three integer arguments representing the side
+lengths.
+7. Define a `Rectangle` object that inherits from `Quadrilateral` and is
+   constructed with two integer arguments that set `width` and `height`
+properties. Implement an `area()` function to calculate the area.
+8. Define a `Square` object that inherits from `Rectangle` and is
+   constructed with a single integer argument that sets a `length`
+property. If everything is wired up right in the prototype chain, `Square` should have access to `area()`, `perimeter()`, `numberOfSides()`, `addToPlane()`, `position`, `move()`, `width`, `height` and so on.
+9. Define and implement a function for `Square` called
+   `listProperties()` that returns a string containing only the
+properties that belong to `Square`. It should not list the
+`constructor`, `area`, `perimeter`, and other things inherited from the
+prototype chain.
 
 ## Resources
 
