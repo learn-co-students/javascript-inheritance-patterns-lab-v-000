@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/learn-co-curriculum/java-script-inheritance-patterns-lab#readme",
   "devDependencies": {
-    "expect": "^1.20.1",
+    "expect": "^1.20.2",
     "jsdom": "^9.3.0",
     "mocha": "^2.5.3",
     "mocha-jsdom": "^1.1.0",
