@@ -52,7 +52,7 @@ arguments and moves the `position` to a new `Point`.
 Define and implement functions on `Circle` to calculate `area()` and
 `circumference()` based on the `radius`.
 4. Define a `Polygon` object that inherits from `Shape`. It should be
-   constructe with an array of `Side` objects that have a `length`
+   constructed with an array of `Side` objects that have a `length`
 property. `Polygon` should have a property called `sides` that holds the
 array of `Side` objects. Implement a function called `perimeter()` that
 calculates the perimeter of any `Polygon` based on the lengths of the
@@ -80,3 +80,5 @@ prototype chain.
 
 - [MDN: Object.create()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create)
 - [MDN: hasOwnProperty()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/javascript-inheritance-patterns-lab'>Inheritance Patterns Lab</a> on Learn.co and start learning to code for free.</p>
