@@ -82,6 +82,9 @@ describe('JavaScript Inheritance Patterns', function() {
     })
     it('is constructed with four sides', function() {
       var q = new Quadrilateral(3,4,3,4)
+      // console.log(q)
+      // console.log(q.numberOfSides())
+      // console.log(q.perimeter())
       expect(q.numberOfSides()).toBe(4)
       expect(q.perimeter()).toBe(14)
     })
