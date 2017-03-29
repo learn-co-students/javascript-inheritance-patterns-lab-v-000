@@ -48,10 +48,19 @@ Circle.prototype = Object.create(Shape.prototype)
 Circle.prototype.constructor = Circle
 
 
-function Polygon() {
+function Polygon() { //inherits from Shape 
+  this.sides = //holds array of Side objects
+  this.perimeter = function() {
+    //based on the lengths of the sides
+  }
 
+  this.numberOfsides = function() {
+    return //number of sides
+  }
 
 }
+Polygon.prototype = Object.create(Shape.prototype)
+
 
 
 function Quadrilateral() {
