@@ -68,7 +68,7 @@ Polygon.prototype.perimeter = function() {
 }
 
 function Quadrilateral(side1, side2, side3, side4) {
-  Polygon.call(this)
+  Polygon.call(this, [new Side(side1), new Side(side2), new Side(side3), new Side(side4)])
   this.side1 = side1
   this.side2 = side2
   this.side3 = side3
@@ -77,3 +77,42 @@ function Quadrilateral(side1, side2, side3, side4) {
 
 Quadrilateral.prototype = Object.create(Polygon.prototype)
 Quadrilateral.prototype.constructor = Quadrilateral
+
+function Triangle(side1, side2, side3) {
+  Polygon.call(this, [new Side(side1), new Side(side2), new Side(side3)])
+  this.side1 = side1
+  this.side2 = side2
+  this.side3 = side3
+}
+
+Triangle.prototype = Object.create(Polygon.prototype)
+Triangle.prototype.constructor = Triangle
+
+function Rectangle(width, height) {
+  Quadrilateral.call(this, width, height, width, height)
+  this.width = width
+  this.height = height
+}
+
+Rectangle.prototype = Object.create(Quadrilateral.prototype)
+Rectangle.prototype.constructor = Rectangle
+
+Rectangle.prototype.area = function() {
+  return this.width * this.height
+}
+
+function Square(length) {
+  Rectangle.call(this, length, length)
+  this.length = length
+}
+
+Square.prototype = Object.create(Rectangle.prototype)
+Square.prototype.constructor = Square
+
+Square.prototype.listProperties = function() {
+  for (var prop in this) {
+    if(this.hasOwnProperty(prop)) {
+      return "this." + prop + " = " + this[prop]
+    }
+  }
+}
