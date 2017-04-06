@@ -34,6 +34,7 @@ Circle.prototype.circumference = function() {
 }
 
 function Polygon(sides) {
+  Shape.call(this);
   this.sides = sides;
 }
 Polygon.prototype = Object.create(Shape.prototype);
