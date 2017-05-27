@@ -24,6 +24,7 @@ function Circle(radius) {
 
 Circle.prototype = Object.create(Shape.prototype);
 Circle.prototype.constructor = Circle;
+
 Circle.prototype.diameter = function() {
     return this.radius * 2;
   }
@@ -46,6 +47,7 @@ function Polygon(sideArray) {
 
 Polygon.prototype = Object.create(Shape.prototype);
 Polygon.prototype.constructor = Polygon;
+
 Polygon.prototype.perimeter = function() {
     var p = 0;
     for (var i=0; i < this.sideArray.length; i++) {
@@ -53,6 +55,7 @@ Polygon.prototype.perimeter = function() {
     }
     return p;
   }
+  
 Polygon.prototype.numberOfSides = function() {
     return this.sideArray.length;
   }
