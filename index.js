@@ -22,6 +22,7 @@ Shape.prototype.move = function(x,y) {
 }
 
 function Circle(radius) {
+  Shape.call(this)
   this.radius = radius;
   this.diameter = function() { return this.radius * 2};
   this.area = function() { return Math.PI * this.radius^2 };
@@ -33,37 +34,58 @@ Circle.prototype.constructor = Circle;
 
 
 function Polygon(sides) {
+  Shape.call(this)
   this.sides = sides;
-  this.numberOfSides = function() { return this.sides.length};
 }
 
 Polygon.prototype = Object.create(Shape.prototype);
 Polygon.prototype.constructor = Polygon;
 
+Polygon.prototype.numberOfSides = function() { return this.sides.length};
+
 Polygon.prototype.perimeter = function() {
-  perimeter = 0;
-  for(i = 0; i < this.sides.length; i++) {
-    perimeter = perimeter + this.sides[i].length;
+  var p = 0;
+  for(var i = 0; i < this.sides.length; i++) {
+    p += this.sides[i].length;
   }
-  return perimeter;
+  return(p);
 }
 
-function Quadrilateral() {
-
-
+function Quadrilateral(a, b, c, d) {
+  Polygon.call(this, [new Side(a), new Side(b), new Side(c),new Side(d)])
 }
 
-function Triangle() {
+Quadrilateral.prototype = Object.create(Polygon.prototype);
+Quadrilateral.prototype.constructor = Quadrilateral;
 
-
-}
-
-function Rectangle() {
-
+function Triangle(a,b,c) {
+  Polygon.call(this, [new Side(a), new Side(b), new Side(c)])
 
 }
 
-function Square() {
+Triangle.prototype = Object.create(Polygon.prototype);
+Triangle.prototype.constructor = Triangle
 
 
+function Rectangle(a, b) {
+  Quadrilateral.call(this, a, b, a, b)
+  this.width = a;
+  this.height = b;
 }
+
+Rectangle.prototype = Object.create(Quadrilateral.prototype);
+Rectangle.prototype.constructor = Rectangle
+
+Rectangle.prototype.area = function() { return this.width * this.height};
+
+function Square(a) {
+  Rectangle.call(this, a, a)
+  this.listProperties = function() {
+    for (var prop in this) {
+      console.log(this + "." + prop + " = " + this[prop]);
+    }
+  }
+}
+
+Square.prototype = Object.create(Rectangle.prototype);
+Square.prototype.constructor = Square
