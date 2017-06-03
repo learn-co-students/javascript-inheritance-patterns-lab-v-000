@@ -116,10 +116,11 @@
   Square.prototype.constructor = Square;
 
   Square.prototype.listProperties = function(){
-    return this.hasOwnProperty();
+    for (var property in this) {
+    if(this.hasOwnProperty(property)) {
+      console.log("rect." + property + " = " + this[property]);
+    }
   }
+}
 
-
-  //
-  // Define a Square object that inherits from Rectangle and is constructed with a single integer argument that sets a length property. If everything is wired up right in the prototype chain, Square should have access to area(), perimeter(), numberOfSides(), addToPlane(), position, move(), width, height and so on.
-  // Define and implement a function for Square called listProperties() that returns a string containing only the properties that belong to Square. It should not list the constructor, area, perimeter, and other things inherited from the prototype chain.
+//implement a function for Square called listProperties() that returns a string containing only the properties that belong to Square. It should not list things inherited from the prototype chain.
