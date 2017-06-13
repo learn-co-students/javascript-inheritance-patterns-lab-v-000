@@ -1,68 +1,98 @@
-function Point(x, y){
-  this.x = x
-  this.y = y
+function Point(x, y) {
+  this.x = x;
+  this.y = y;
 }
 
-Point.prototype.toString = function(){
-	return "(" + this.x + ", " + this.y + ")"
+Point.prototype.toString = function() {
+  return("(" + this.x + "," + this.y + ")");
 }
 
-function Side(l){
-	this.length = l
+function Side(length) {
+  this.length = length;
 }
 
-function Shape(){
+function Shape() {}
 
+Shape.prototype.addToPlane = function(x, y) {
+  this.position = new Point(x,y);
+}
+Shape.prototype.move = function(x,y) {
+  this.position = new Point(x,y);
 }
 
-Shape.prototype.addToPlane = function(x, y){
-		console.log("here")
-	this.position = new Point(x, y)
-	return this.position
+function Circle(radius) {
+  Shape.call(this);
+  this.radius = radius;
+}
+Circle.prototype = Object.create(Shape.prototype);
+Circle.prototype.constructor = Circle;
+Circle.prototype.diameter = function() {
+  return(this.radius*2);
+}
+Circle.prototype.area = function() {
+  return(Math.PI * this.radius^2);
+}
+Circle.prototype.circumference = function() {
+  return(2 * Math.PI * this.radius);
 }
 
-Shape.prototype.move = function(x, y){
-		console.log("in move")
-	this.position = new Point(x, y)
-	return this.position
+function Polygon(sides) {
+  Shape.call(this);
+  this.sides = sides;
 }
 
-function Circle(radius){
-    this.radius = radius
+Polygon.prototype = Object.create(Shape.prototype);
+Polygon.prototype.constructor = Polygon;
+Polygon.prototype.perimeter = function() {
+  var p = 0;
+  for(var i=0;i< this.sides.length; i++) {
+    p += this.sides[i].length;
+  }
+  return(p);
+}
+Polygon.prototype.numberOfSides = function() {
+  return(this.sides.length);
 }
 
-Object.setPrototypeOf(Circle, Shape)
-
-var testShape = new Shape()
-
-Circle.prototype = testShape
-
-Circle.prototype.diameter = function(){
-	return 2*this.radius
+function Triangle(sideOneLength, sideTwoLength, sideThreeLength) {
+  Polygon.call(this, [new Side(sideOneLength), new Side(sideTwoLength), new Side(sideThreeLength)])
 }
 
-Circle.prototype.area = function(){
-	return Math.PI * this.radius^2
+Triangle.prototype = Object.create(Polygon.prototype);
+Triangle.prototype.constructor = Triangle;
+
+function Quadrilateral(sideOneLength, sideTwoLength, sideThreeLength, sideFourLength) {
+  Polygon.call(this, [new Side(sideOneLength), new Side(sideTwoLength), new Side(sideThreeLength), new Side(sideFourLength)]);
 }
 
-Circle.prototype.circumference = function(){
-	return 2 * Math.PI * this.radius
+Quadrilateral.prototype = Object.create(Polygon.prototype);
+Quadrilateral.prototype.constructor = Quadrilateral;
+
+function Rectangle(width, height) {
+  Quadrilateral.call(this, width, height, width, height);
+  this.width = width;
+  this.height = height;
+}
+Rectangle.prototype = Object.create(Quadrilateral.prototype);
+Rectangle.prototype.constructor = Rectangle
+Rectangle.prototype.area = function() {
+  return this.width * this.height;
 }
 
-function Side(length){
-	this.length = length
+function Square(length) {
+  Rectangle.call(this, length, length)
+  this.length = length;
 }
 
-function Polygon(sides_array) {
-    this.sides_array = sides_array
-}
+Square.prototype = Object.create(Rectangle.prototype);
+Square.prototype.constructor = Square
 
-Polygon.prototype = testShape
-
-// 'this' in this function is coming out to Circle for some reason 
-Polygon.prototype.circumference = function() {
-	debugger
-	this.sides_array.reduce(function(a, b){
-		return a.length + b.length
-	})
+Square.prototype.listProperties = function() {
+  var props = "";
+  for (var prop in this) {
+    if(this.hasOwnProperty(prop)) {
+      props += "this." + prop + " = " + this[prop] + "\n";
+    }
+  }
+  return(props);
 }
