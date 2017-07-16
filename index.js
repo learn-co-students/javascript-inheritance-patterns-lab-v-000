@@ -73,7 +73,7 @@ function Polygon(sides) {
 
 Polygon.prototype = Object.create(Shape.prototype);
 
-//Polygon.prototype.constructor = Polygon; 
+Polygon.prototype.constructor = Polygon; 
 
 Polygon.prototype.perimeter = function() {
 	var perim = 0;
@@ -132,7 +132,7 @@ function Triangle(s1,s2,s3) {
 }
 
 Triangle.prototype = Object.create(Polygon.prototype); 
-//Triangle.prototype.constructor = Triangle; 
+Triangle.prototype.constructor = Triangle; 
 
 
 
