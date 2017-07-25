@@ -7,6 +7,8 @@ function Point(x,y) {
   }
 }
 
-function Shape() {
-  
-}
+function Shape() {}
+
+Shape.prototype.addToPlane = function (x, y) {
+  this.position = new Point(x,y)
+};
