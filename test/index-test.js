@@ -2,12 +2,12 @@ describe('JavaScript Inheritance Patterns', function() {
   describe('Point', function() {
     it('exists', function() {
       expect(Point).toExist()
-      var p = new Point(1,1)
+      var p = new Point(1, 1)
       expect(p).toBeA(Point)
     })
     it('defines a toString on the prototype', function() {
       expect(Point.prototype.toString).toExist()
-      var p = new Point(2,3)
+      var p = new Point(2, 3)
       expect(p.toString()).toMatch(/2,\s?3/)
     })
   })
@@ -27,15 +27,15 @@ describe('JavaScript Inheritance Patterns', function() {
     it('can be added to a plane', function() {
       expect(Shape.prototype.addToPlane).toExist()
       var s = new Shape()
-      s.addToPlane(3,4)
+      s.addToPlane(3, 4)
       expect(s.position).toBeA(Point)
       expect(s.position.toString()).toMatch(/3,\s?4/)
     })
     it('can be moved', function() {
       expect(Shape.prototype.move).toExist()
       var s = new Shape()
-      s.addToPlane(1,1)
-      s.move(3,4)
+      s.addToPlane(1, 1)
+      s.move(3, 4)
       expect(s.position.toString()).toMatch(/3,\s?4/)
     })
   })
@@ -53,7 +53,7 @@ describe('JavaScript Inheritance Patterns', function() {
     })
     it('knows its area and circumference', function() {
       var c = new Circle(2)
-      expect(c.area()).toBe(Math.PI * c.radius ** 2)
+      expect(c.area()).toBe(Math.PI * c.radius ^ 2)
       expect(c.circumference()).toBe(2 * Math.PI * c.radius)
     })
   })
@@ -81,7 +81,7 @@ describe('JavaScript Inheritance Patterns', function() {
       expect(Quadrilateral.prototype).toBeA(Polygon)
     })
     it('is constructed with four sides', function() {
-      var q = new Quadrilateral(3,4,3,4)
+      var q = new Quadrilateral(3, 4, 3, 4)
       expect(q.numberOfSides()).toBe(4)
       expect(q.perimeter()).toBe(14)
     })
@@ -93,7 +93,7 @@ describe('JavaScript Inheritance Patterns', function() {
       expect(Rectangle.prototype).toBeA(Quadrilateral)
     })
     it('is constructed with width and height', function() {
-      var r = new Rectangle(3,2)
+      var r = new Rectangle(3, 2)
       expect(r.width).toBe(3)
       expect(r.height).toBe(2)
       expect(r.numberOfSides()).toBe(4)
@@ -102,7 +102,7 @@ describe('JavaScript Inheritance Patterns', function() {
     it('calculates its area', function() {
       expect(Rectangle.prototype.area).toExist()
       expect(Quadrilateral.prototype.area).toNotExist()
-      var r = new Rectangle(3,2)
+      var r = new Rectangle(3, 2)
       expect(r.area()).toBe(r.width * r.height)
     })
   })
@@ -115,9 +115,9 @@ describe('JavaScript Inheritance Patterns', function() {
       expect(s.numberOfSides()).toBe(4)
       expect(s.area()).toBe(16)
       expect(s.perimeter()).toBe(16)
-      s.addToPlane(3,4)
+      s.addToPlane(3, 4)
       expect(s.position.toString()).toMatch(/3,\s?4/)
-      s.move(1,2)
+      s.move(1, 2)
       expect(s.position.toString()).toMatch(/1,\s?2/)
       expect(s.width).toBe(4)
       expect(s.height).toBe(4)
@@ -137,11 +137,9 @@ describe('JavaScript Inheritance Patterns', function() {
       expect(Triangle).toExist()
       expect(Triangle.prototype).toBeA(Polygon)
       expect(Triangle.prototype).toNotBeA(Quadrilateral)
-      var t = new Triangle(3,3,3)
+      var t = new Triangle(3, 3, 3)
       expect(t.perimeter()).toBe(9)
       expect(t.numberOfSides()).toBe(3)
     })
   })
-
-
 });
