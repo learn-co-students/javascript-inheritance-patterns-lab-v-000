@@ -17,13 +17,11 @@ function Shape(x, y) {
 }
 
 Shape.prototype.addToPlane = function(x, y) {
-	var pos = new Point(x, y);
-	this.position = pos;
+	this.position = new Point(x, y);
 }
 
 Shape.prototype.move = function(x, y) {
-	var pos = new Point(x, y);
-	this.position = pos;
+	this.position = new Point(x, y);
 }
 
 function Circle(radius) {
@@ -54,11 +52,11 @@ Polygon.prototype = Object.create(Shape.prototype);
 Polygon.prototype.constructor = Polygon;
 
 Polygon.prototype.perimeter = function() {
-	var perim = 0;
+	var p = 0;
 	for(var index in this.sides) {
-		perim += this.sides[index].length;
+		p += this.sides[index].length;
 	}
-	return perim;
+	return p;
 }
 
 Polygon.prototype.numberOfSides = function() {
@@ -66,13 +64,7 @@ Polygon.prototype.numberOfSides = function() {
 }
 
 function Quadrilateral(sideOne, sideTwo, sideThree, sideFour) {
-	Polygon.call(this);
-	var sideArr = [];
-	sideArr.push(new Side(sideOne));
-	sideArr.push(new Side(sideTwo));
-	sideArr.push(new Side(sideThree));
-	sideArr.push(new Side(sideFour));
-	this.sides = sideArr;
+	Polygon.call(this, [new Side(sideOne), new Side(sideTwo), new Side(sideThree), new Side(sideFour)]);
 }
 
 Quadrilateral.prototype = Object.create(Polygon.prototype);
@@ -110,12 +102,7 @@ Square.prototype.listProperties = function() {
 }
 
 function Triangle(sideOne, sideTwo, sideThree) {
-	Polygon.call(this);
-	var sideArr = [];
-	sideArr.push(new Side(sideOne));
-	sideArr.push(new Side(sideTwo));
-	sideArr.push(new Side(sideThree));
-	this.sides = sideArr;
+	Polygon.call(this, [new Side(sideOne), new Side(sideTwo), new Side(sideThree)]);
 }
 
 Triangle.prototype = Object.create(Polygon.prototype);
