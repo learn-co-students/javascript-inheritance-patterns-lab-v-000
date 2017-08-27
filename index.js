@@ -3,43 +3,39 @@ function Point(x, y) {
   this.y = y;
 }
 
-Point.prototype.to_string = function () [
+Point.prototype.toString = function() {
   return("(" + this.x + "," + this.y + ")");
 }
 
-function Shape() {}
-  
 function Side(length) {
   this.length = length;
 }
 
+function Shape() {}
+
 Shape.prototype.addToPlane = function(x, y) {
   this.position = new Point(x,y);
 }
-  
 Shape.prototype.move = function(x,y) {
   this.position = new Point(x,y);
 }
-  
+
 function Circle(radius) {
   Shape.call(this);
   this.radius = radius;
 }
-  
 Circle.prototype = Object.create(Shape.prototype);
 Circle.prototype.constructor = Circle;
 Circle.prototype.diameter = function() {
   return(this.radius*2);
 }
-
 Circle.prototype.area = function() {
   return(Math.PI * this.radius^2);
 }
-  
 Circle.prototype.circumference = function() {
   return(2 * Math.PI * this.radius);
 }
-  
+
 function Polygon(sides) {
   Shape.call(this);
   this.sides = sides;
@@ -54,7 +50,6 @@ Polygon.prototype.perimeter = function() {
   }
   return(p);
 }
-
 Polygon.prototype.numberOfSides = function() {
   return(this.sides.length);
 }
