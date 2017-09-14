@@ -67,21 +67,21 @@ Polygon.prototype.perimeter = function() {
 
 
 function Quadrilateral(a,b,c,d) {
-  this.sides = [new Side(a), new Side(b), new Side(c), new Side(d)]
+  Polygon.call(this, [new Side(a), new Side(b), new Side(c), new Side(d)]);
 }
 
 Quadrilateral.prototype = Object.create(Polygon.prototype)
 Quadrilateral.prototype.constructor = Quadrilateral
 
 function Triangle(x, y, z) {
-  this.sides = [new Side(x), new Side(y), new Side(z)]
+  Polygon.call(this, [new Side(x), new Side(y), new Side(z)])
 }
 
 Triangle.prototype = Object.create(Polygon.prototype)
 Triangle.prototype.constructor = Triangle
 
 function Rectangle(x,y) {
-  this.sides = [new Side(x), new Side(y), new Side(x), new Side(y)]
+  Quadrilateral.call(this, x, y, x, y)
   this.width = x;
   this.height = y
 }
@@ -94,7 +94,7 @@ Rectangle.prototype.area = function(){
 }
 
 function Square(x) {
-  this.sides = [new Side(x), new Side(x), new Side(x), new Side(x)]
+  Rectangle.call(this, x, x)
   this.width = x
   this.height = x
 }
