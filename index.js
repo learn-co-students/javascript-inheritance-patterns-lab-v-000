@@ -102,11 +102,26 @@ function Rectangle(width, height) { //inherits from Quadrilateral
 
 Rectangle.prototype = Object.create(Quadrilateral.prototype);
 Rectangle.prototype.constructor = Rectangle;
-Rectangle.prototype.area = function(0 {
-  return (this.width * this.length);
-})
-
-
-function Square(myside) {
-
+Rectangle.prototype.area = function(){
+  return (this.width * this.height);
 }
+
+
+function Square(mySide) {
+  Rectangle.call(this, mySide, mySide);
+  this.length = mySide;
+}
+
+Square.prototype = Object.create(Rectangle.prototype);
+Square.prototype.constructor = Square;
+Square.prototype.listProperties = function() {
+  for (var prop in this) {
+    if(this.hasOwnProperty(prop)) {
+      console.log(prop)
+    }
+  }
+}
+
+
+
+
