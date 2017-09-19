@@ -95,13 +95,16 @@ Triangle.prototype.constructor = Triangle;
 
 function Rectangle(width, height) { //inherits from Quadrilateral
 
-  Quadrilateral.call(this, 4);
+  Quadrilateral.call(this, width, height, width, height);
   this.width = width;
   this.height = height;
 }
 
 Rectangle.prototype = Object.create(Quadrilateral.prototype);
 Rectangle.prototype.constructor = Rectangle;
+Rectangle.prototype.area = function(0 {
+  return (this.width * this.length);
+})
 
 
 function Square(myside) {
