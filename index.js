@@ -48,39 +48,76 @@ Circle.prototype = Object.create(Shape.prototype)
 Circle.prototype.constructor = Circle
 
 
-function Polygon() { //inherits from Shape 
-  this.sides = //holds array of Side objects
-  this.perimeter = function() {
-    //based on the lengths of the sides
-  }
 
-  this.numberOfsides = function() {
-    return //number of sides
-  }
-
-}
 Polygon.prototype = Object.create(Shape.prototype)
-
-
-
-function Quadrilateral() {
-
+// var array = [{length: 2}, {length: 4}, {length: 2}, {length: 4}]
+Polygon.prototype.perimeter = function() {
+  var p = 0;
+  for(var i=0;i< this.sides.length; i++) {
+    p += this.sides[i].length;
+  }
+  return(p);
 }
 
 
-function Triangle() {
+Polygon.prototype.numberOfSides = function() {
+  return this.sides.length
+}
 
+function Polygon(ary) { 
+  this.sides = ary 
+}
+
+function Quadrilateral(a, b, c, d) {
+  Polygon.call(this, [new Side(a), new Side(b), new Side(c), new Side(d)]);
+}
+
+Quadrilateral.prototype = Object.create(Polygon.prototype);
+Quadrilateral.prototype.constructor = Quadrilateral;
+
+
+Triangle.prototype = Object.create(Polygon.prototype)
+Triangle.prototype.constructor = Triangle
+
+function Triangle(a, b, c) {
+  Polygon.call(this, [new Side(a), new Side(b), new Side(c)])
+}
+
+// function Triangle(a, b, c) {
+//   Polygon.call(this, new Side(a), new Side(b), new Side(c));
+// }
+
+// two integer arguments that set width and height properties. 
+//Implement an area() function to calculate the area
+Rectangle.prototype = Object.create(Quadrilateral.prototype)
+Rectangle.prototype.constructor = Rectangle
+Rectangle.prototype.area = function() {
+  return this.width * this.height
+}
+
+function Rectangle(x, y) {
+  Quadrilateral.call(this, x, y, x, y)
+  this.width = x
+  this.height = y
 }
 
 
-function Rectangle() {
+Rectangle.prototype = Object.create(Quadrilateral.prototype);
+Rectangle.prototype.constructor = Rectangle
+Rectangle.prototype.area = function() {
+  return this.width * this.height;
+}
 
+
+Square.prototype = Object.create(Rectangle.prototype)
+Square.prototype.listProperties = function() {
 
 }
 
-function Square() {
-
-}
+function Square(side) {
+  Rectangle.call(this, side, side)
+  this.length = side;
+} 
 
 
 
